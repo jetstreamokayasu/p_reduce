@@ -92,3 +92,60 @@ reduce_points<-function(x, conect){
   return(y)
   
 }
+
+
+cell_set2<-function(x, thresh){
+  
+  #cell_p<-c(0, 0)
+  #cell_s<-0
+  #i_p<-1
+  #i_s<-1
+  x_dist<-dist(x)
+  #i<-0
+    #i_j<-i_p
+    
+    cell_p<-lapply(1:nrow(x), function(k){
+      if(k %% (nrow(x)/100) == 0){
+        debugText(k)
+        #i<-i+1
+        }
+      #debugText(k)
+      cp<-which(as.matrix(x_dist)[k, ] <= thresh) %>% 
+          setdiff(., k) %>% c(k, .)
+      
+    })
+  
+  return(cell_p)
+  
+}
+
+connect2<-function(i, cell_p, all, cnct=list(c(0, 0))){
+  l<-1
+  if(i==1){
+    
+    cnct[[1]]<-c(cell_p[[i]])
+    #debugText(cnct)
+  }
+  else{
+    
+    diff<-setdiff(cell_p[[i]], unlist(cnct))
+    #debugText(diff)
+    cnct<-c(cnct, list(diff))
+    
+  }
+  
+  #debugText(i, cnct)
+  
+  diffset<-setdiff(all, unlist(cnct))
+  
+  if(length(diffset) != 0){
+    
+    j<-diffset[1]
+    debugText(j)
+    cnct<-connect2(j, cell_p, all, cnct)
+    
+  }
+  
+  return(cnct)
+  
+}
