@@ -119,7 +119,8 @@ cell_set2<-function(x, thresh){
   
 }
 
-#
+#ある一定の距離以下にある点の集合を返す
+##全データ点を中心にした集合の重なりをなくす
 connect2<-function(i, cell_p, all, cnct=list(c(0, 0))){
   l<-1
   if(i==1){
