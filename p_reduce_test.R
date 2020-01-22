@@ -154,3 +154,6 @@ plot(anu2_red2)
 
 anu2_red2_diag<-ripsDiag(anu2_red2, maxdimension = 1, maxscale = 3)
 plot(anu2_red2_diag[[1]])
+
+#二神さんの閾値設定法試し
+anu2_thresh<-quantile_threshold(0.8, anu2)

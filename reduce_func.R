@@ -93,7 +93,7 @@ reduce_points<-function(x, conect){
   
 }
 
-
+#各点を中心に閾値以下の範囲に存在する点のインデックスを返す関数
 cell_set2<-function(x, thresh){
   
   #cell_p<-c(0, 0)
@@ -119,6 +119,7 @@ cell_set2<-function(x, thresh){
   
 }
 
+#
 connect2<-function(i, cell_p, all, cnct=list(c(0, 0))){
   l<-1
   if(i==1){
@@ -148,4 +149,17 @@ connect2<-function(i, cell_p, all, cnct=list(c(0, 0))){
   
   return(cnct)
   
+}
+
+
+#二神さんのpoly複体プログラム群から
+quantile_threshold <- function(x, X) {
+  require(assertthat)
+  assert_that(all(x < 1))
+  assert_that(all(0 <= x))
+  assert_that(is.matrix(X))
+  d <- dist(X) %>% as.matrix
+  d[d <= 0] <- Inf
+  mins <- apply(d, 2, min)
+  return(mins %>% quantile(x))
 }
