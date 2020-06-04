@@ -105,7 +105,7 @@ cell_set2<-function(x, thresh){
     #i_j<-i_p
     
     cell_p<-lapply(1:nrow(x), function(k){
-      if(k %% (nrow(x)/100) == 0){
+      if(k %% (round(nrow(x)/100)) == 0){
         debugText(k)
         #i<-i+1
         }
